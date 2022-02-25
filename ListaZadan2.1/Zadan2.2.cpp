@@ -25,4 +25,5 @@ int main()
 	cout << endl << "c: ";
 	cin >> c;
 	cout << endl << "Max: " << max(a, b, c);
+	return 0;
 }

@@ -14,6 +14,8 @@ void printArr(int* T, unsigned n){
 
 int main()
 {
-    int T[20];
-    printArr(T, 20);
+    const unsigned n = 20; // n > 0
+    int T[n];
+    printArr(T, n);
+    return 0;
 }

@@ -17,4 +17,5 @@ int main()
 	cout << "Write number of lines: ";
 	cin >> n;
 	write(n);
+	return 0;
 }
