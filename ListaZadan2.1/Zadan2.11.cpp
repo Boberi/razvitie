@@ -13,15 +13,17 @@ void readArr(int *T, const unsigned n){
 
 int findMaxIndex(int *T, const unsigned n){
     int max = 0;
+    int index = 0;
     for (unsigned i = 1; i < n; i++)
     {
         if (T[i] > max)
         {
-            max = i;
+            max = T[i];
+            index = i;
         }
         
     }
-    return max;
+    return index;
     
 }
 
