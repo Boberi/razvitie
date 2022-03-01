@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 /*
 Zadanie 1.
 Zaprojektowa¢ i zaimplementowa¢ funkcj¦ obliczaj¡c¡ sum¦ dwóch liczb przekazanych,
@@ -56,7 +55,7 @@ float kwadrat(float a){
 }
 
 float szeszcian(float a){
-    return iloczyn(a, iloczyn(a, a));
+    return iloczyn(a, kwadrat(a));
 }
 
 float fun(float a){
@@ -67,9 +66,22 @@ float obwod(float a, float b, float c){
     return sum(sum(a,b),c);
 }
 
+float korzen(float a)
+{
+    float error = 0.00001f; 
+    float s = a;
+    float b;
+    while ((roznic(s, iloraz(a , s))) > error)
+    {
+        b = sum(s, iloraz(a, s));
+        s = iloraz(b, 2.0f);
+    }
+    return s;
+}
+
 float pole(float a, float b, float c){
-    float p = iloraz(obwod(a, b, c), 2);
-    float pole = sqrt(iloczyn(
+    float p = iloraz(obwod(a, b, c), 2.0f);
+    float pole = korzen(iloczyn(
         iloczyn(
             iloczyn(
                 roznic(p, b), roznic(p, c)
