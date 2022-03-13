@@ -1,66 +1,163 @@
 #include <iostream>
 
-/*
-Zadanie 1.
-Zaprojektowa¢ i zaimplementowa¢ funkcj¦ wyznaczaj¡c¡ rekurencyjnie warto±¢ silni z
-liczby podanej przez u»ytkownika.
-Zadanie 2.
-Zaprojektowa¢ i zaimplementowa¢ funkcj¦ wyznaczaj¡c¡ iteracyjnie warto±¢ silni z liczby
-podanej przez u»ytkownika.
-Zadanie 3.
-Zaprojektowa¢ i zaimplementowa¢ funkcj¦ wyznaczaj¡c¡ rekurencyjnie warto±¢ n-tego wyrazu ci¡gu Fibonacciego.
-Zadanie 4.
-Zaprojektowa¢ i zaimplementowa¢ funkcj¦ wyznaczaj¡c¡ iteracyjnie warto±¢ n-tego wyrazu ci¡gu Fibonacciego.
-*/
-
-long rekurSilnia(int a){
-
-    if (a == 0)
-    {
-        return 1;
-    }
-    return rekurSilnia(a - 1) * a;
-
+void wypisz(const int *t, const unsigned n){
+	for (unsigned i = 0; i < n; ++i)
+	{
+		std::cout << t[i] << " ";
+	}
 }
 
-long iterSilnia(int a){
-
-    long result = 1;
-    for (int i = 1; i <= a; i++)
-    {
-        result *= i;
-    }
-    return result;
-
+int* utworz1(const unsigned n){
+	int *t = new int[n];
+	for (unsigned i = 0; i < n; ++i)
+	{
+		t[i] = 0;
+	}
+	return t;
 }
 
-int rekurFibb(int a){
-
-    if (a == 1 || a == 2 || a == 0)
-    {
-        return 1;
-    }
-    return rekurFibb(a - 1) + rekurFibb(a - 2);
-    
+void utworz2(int*& t, const unsigned n){
+	delete t;
+	t = new int[n]; 
+	for (unsigned i = 0; i < n; ++i)
+	{
+	t[i] = 0;
+	}
 }
 
-int iterFibb(int a){
+void utworz3(int* t, const unsigned n){
+	for (unsigned i = 0; i < n; i++)
+	{
+		t[i] = 0;
+	}
+	
+}
 
-    int secondNumber, firstNumber = 0, currentNumber = 1;
+void usun(int *t){
+	if(t){
+		delete[] t;
+		t = nullptr;
+		}
+}
 
-        for (int i = 1; i < a ; i++) {
-            secondNumber = firstNumber;
-            firstNumber = currentNumber;
-            currentNumber = secondNumber + firstNumber;
-        }
-        return currentNumber;
+void zad4(int* t, const unsigned n){
+		for (unsigned i = 0; i < n; i++)
+		{
+			if (i < n / 2) {
+				t[i] = 0;
+			} else {
+				t[i] = i + 1;
+			}
+		}
+		
+}
 
+void zad5(int *t, const unsigned n){
+		for (unsigned i = 0; i < n; i++)
+		{
+			t[i] = rand() % 100;
+		}
+		
+}
+
+void zad6(int *t, const unsigned n){
+		int a, b;
+		std::cout << "Min: ";
+		std::cin >> a;
+		std::cout << "Max: ";
+		std::cin >> b;
+		for (unsigned i = 0; i < n; i++)
+		{
+			t[i] = a + (rand() % (b - a + 1));
+		}
+}
+
+int* suma1(const int* t1, const int* t2, const unsigned n){
+	int* result = new int(0);
+	for (unsigned i = 0; i < n; i++)
+	{
+		*result += t1[i] + t2[i];
+	}
+	return result;
+}
+
+void suma2(const int* t1, const int* t2, int*& t3, const unsigned n){
+		delete t3;
+		t3 = new int(0);
+		for (unsigned i = 0; i < n; i++)
+		{
+			*t3 += t1[i] + t2[i];
+		}
+}
+void suma3(const int* t1, const int* t2, int* t3, const unsigned n){
+		*t3 = 0;
+		for (unsigned i = 0; i < n; i++)
+		{
+			*t3 += t1[i] + t2[i];
+		}
+}
+
+void usunElement(int *& t, unsigned& n){
+	wypisz(t, n);
+	int element = 0;
+	unsigned index = 0;
+	bool choose = true;
+	int *buff = new int[n - 1];
+	while(choose){
+			std::cout <<"\nWybierz: ";
+			std::cin >> element;
+			for (unsigned i = 0; i < n; i++)
+			{
+				if (t[i] == element)
+				{
+					choose = false;
+					index = i;
+					break;
+				}
+			}
+	}
+	for (unsigned i = 0; i < n - 1; i++)
+	{
+		if (i >= index)
+		{
+			buff[i] = t[i + 1];
+		} else{
+			buff[i] = t[i];
+		}
+	}
+	std::cout << "\n";
+	usun(t);
+	t = buff;
+	wypisz(t, n - 1);
+	n--;
+}
+
+void dodajElement(int*&t, unsigned& n){
+	wypisz(t, n);
+	int element;
+	int* buff = new int[n + 1];
+	std::cout << "\nWypisz: ";
+	std::cin >> element;
+	buff[0] = element;
+	for (unsigned i = 1; i < n + 1; i++)
+	{
+		buff[i] = t[i - 1];
+	}
+	usun(t);
+	t = buff;
+	wypisz(t, n + 1);
+	n++;
+	
 }
 
 int main(){
-    std::cout << iterFibb(8) << std::endl;
-    std::cout << rekurFibb(5) << std::endl;
-    std::cout << iterSilnia(8) << std::endl;
-    std::cout << rekurSilnia(5) << std::endl;
-    return 0;
+	unsigned n;
+	std::cout << "Rozmiar : ";
+	std::cin >> n;
+	int *a = utworz1(n);
+	wypisz(a, n);
+	zad5(a, n);
+	std::cout << "\n";
+	dodajElement(a, n); 
+	usun(a);	
 }
