@@ -90,6 +90,7 @@ void suma2(const int* t1, const int* t2, int*& t3, const unsigned n){
 		}
 }
 void suma3(const int* t1, const int* t2, int* t3, const unsigned n){
+        delete t3;
 		*t3 = 0;
 		for (unsigned i = 0; i < n; i++)
 		{
